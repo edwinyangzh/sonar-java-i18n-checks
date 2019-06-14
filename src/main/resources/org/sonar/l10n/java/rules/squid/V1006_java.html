@@ -1,0 +1,40 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>Don't use the <code>java.io.OutputStreamWriter()</code> contructors without an explicit charset/encoding. Violation of this rule can cause loss or corruption of text data (P0/P1 bugs). The method's vulnerabilities are due to the default charset/encoding being set at initialization of the JVM. Often, the default charset/encoding is not the desired. The Windows environment is particularly prone to issues with this API.</p>
+<p>When using the compliant forms, be sure that arguments passed are valid charsets/encodings as a <code>String</code> name or <code>java.nio.Charset</code> instance. To insure compliance, the charset/encoding argument is checked with <code>Charset.isSupported</code>.</p>
+<p>As a best practice, the Unicode UTF-8 encoding should be used wherever possible. There are, of course, exceptions such as work with big (textual) data or other text explicitly using non-Unicode/legacy encodings. Noncompliant forms may also generate SonarQube issues for unsupported encodings.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class OutputStreamWriterConstructorCheck {
+
+  OutputStreamWriter methodA1(OutputStream is) {
+    return new OutputStreamWriter(is);  //Noncompliant
+  }
+
+  OutputStreamWriter methodB2(OutputStream is) throws UnsupportedEncodingException {
+    return new OutputStreamWriter(is, "US-ASCII");  //Noncompliant
+  }
+
+  OutputStreamWriter methodC2(OutputStream is) throws UnsupportedEncodingException {
+    return new OutputStreamWriter(is, StandardCharsets.ISO_8859_1);  //Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class OutputStreamWriterConstructorCheck {
+
+  OutputStreamWriter methodB1(OutputStream is) throws UnsupportedEncodingException {
+    return new OutputStreamWriter(is, "UTF-8");
+  }
+
+  OutputStreamWriter methodC1(OutputStream is) throws UnsupportedEncodingException {
+    return new OutputStreamWriter(is, StandardCharsets.UTF_8);
+  }
+}
+</pre>
+

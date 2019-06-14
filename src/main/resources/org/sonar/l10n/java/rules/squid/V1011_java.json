@@ -1,0 +1,14 @@
+{
+  "title": "Unicode ICU and not java's SimpleDateFormat class should be used for dates and times",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "i18n"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

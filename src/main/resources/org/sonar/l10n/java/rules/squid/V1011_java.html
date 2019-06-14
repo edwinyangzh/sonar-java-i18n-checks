@@ -1,0 +1,26 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>Java's <code>SimpleDateFormat</code> does not produce correct format arrangement for any locale other than English. Unicode ICU DateTimePatternGenerator should be used instead.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+  Locale userPreferredLocale = Locale.forLanguageTag("zh-Hans");
+  ...
+  SimpleDateFormat sdf = new SimpleDateFormat(new DateFormat.getInstance(DateFormat.MEDIUM, userPreferredLocale);
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+  import com.ibm.icu.text.DateTimePatternGenerator;
+  import com.ibm.icu.text.SimpleDateFormat;
+  import com.ibm.icu.util.ULocale;
+  ...
+  ULocale userPreferredLocale = ULocale.forLanguageTag("zh-Hans");
+  ...
+  DateTimePatternGenerator dtpg = DateTimePatternGenerator.getInstance(userPreferredLocale);
+  //pattern for com.ibm.icu.text.DateFormat.FULL="MMM DD,YYYY,h:mm A"
+  SimpleDateFormat sdf = new SimpleDateFormat(dtpg.getBestPattern("MMM dd, YYYY, h:mm A"), uloc);
+</pre>

@@ -1,0 +1,15 @@
+{
+  "title": "Linguistic sorting with the Collator must include a locale argument",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "i18n",
+    "level-2"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

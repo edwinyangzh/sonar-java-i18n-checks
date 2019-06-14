@@ -1,0 +1,19 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>If <code>Arrays.sort</code> is used to sort non-English text, then an instance of <code>Collator</code> must be passed to insure
+  correct linguistic sorting. Be sure to pass the correct user-preferred locale to the <code>Collator</code> instantiation.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+  Arrays.sort(someText);
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+  Locale userPreferredLocale = Locale.forLanguageTag("zh-Hans");
+  ...
+  Arrays.sort(someText, Collator.getInstance(userPreferredLocale));
+</pre>

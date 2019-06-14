@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>Legacy (non-Unicode) encodings such as ISO-8859-1, ShiftJIS, GB2312, etc., are often a sign that text data loss or corruption could occur (P0/P1 bugs). Use of legacy encodings should be avoided wherever possible in favor of Unicode UTF-8 or other Unicode encodings.</p>
+<p>As a best practice, the Unicode UTF-8 encoding should be used wherever possible. There are, of course, exceptions such as work with big (textual) data or other text explicitly using non-Unicode/legacy encodings.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class LegacyEncodingsCheck {
+  public static final String BIG5 = "Big5";  // Noncompliant
+
+  String methodA1(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes, "ISO-8859-1");  // Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class LegacyEncodingsCheck {
+  public static final String UTF_8 = "UTF-8";
+
+  String methodA1(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes, "UTF-8");
+  }
+}
+</pre>
+

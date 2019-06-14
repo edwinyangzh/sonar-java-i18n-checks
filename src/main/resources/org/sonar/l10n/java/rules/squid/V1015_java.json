@@ -1,0 +1,15 @@
+{
+  "title": "Compare methods on string should be avoided for non-English text",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "i18n",
+    "level-2"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

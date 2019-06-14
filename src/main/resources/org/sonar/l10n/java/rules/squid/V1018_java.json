@@ -1,0 +1,15 @@
+{
+  "title": "Operations to change the case of text should be used with a proper Locale parameter",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "i18n",
+    "level-2"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

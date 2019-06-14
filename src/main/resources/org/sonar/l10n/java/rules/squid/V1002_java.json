@@ -1,0 +1,15 @@
+{
+  "title": "String.getBytes should not be used without a charset/encoding parameter",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "30min"
+  },
+  "tags": [
+    "pitfall",
+	"i18n"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

@@ -1,0 +1,28 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>The <code>String.toLowerCase()</code> and <code>String.toUpperCase()</code> methods are locale sensitive, and may produce unexpected results if used for strings that are intended to be interpreted locale independently. Casing is often used on programming language identifiers, protocol keys, and HTML tags. As an example, and a particularly problematic one, "title".toUpperCase() in a Turkish locale returns "T\u0130TLE", where '\u0130' is the LATIN CAPITAL LETTER I WITH DOT ABOVE character.</p>
+<p>In the Turkish alphabet there are two letters for ‘i’, The two lowercase letters are \u0069 ‘i’ and \u0131 ‘ı’ (dotless ‘I’) are
+  totally unrelated. Their uppercase versions are \u0130 ‘İ’ (capital letter ‘I’ with dot above it) and \u0049 ‘I’.</p>
+<p>In cases where strictly English-only casing is desired, the use of the <code>Locale.ENGLISH</code> constant is acceptable. Locale constants should otherwise be avoided in favor of explicit, user-preferred locales.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+  text.toLowerCase();
+  text.toUpperCase();
+  text.toTitleCase();
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+  text.toLowerCase(Locale.ENGLISH); //for English-only keywords, tags, identifiers, etc.
+  text.toUpperCase(Locale.ENGLISH); //for English-only keywords, tags, identifiers, etc.
+  text.toTitleCase(Locale.ENGLISH); //for English-only keywords, tags, identifiers, etc.
+
+  or
+  
+  text.toLowerCase(userPreferredLocale);
+  text.toUpperCase(userPreferredLocale);
+  text.toTitleCase(userPreferredLocale);  
+</pre>

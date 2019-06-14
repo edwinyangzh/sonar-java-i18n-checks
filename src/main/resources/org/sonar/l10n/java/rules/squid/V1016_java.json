@@ -1,0 +1,15 @@
+{
+  "title": "Collections.sort should not be used to sort text without passing a Collator argument",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "i18n",
+    "level-2"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

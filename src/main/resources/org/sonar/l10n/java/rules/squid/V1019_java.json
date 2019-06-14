@@ -1,0 +1,15 @@
+{
+  "title": "Hard-coded Locale class constants should be avoided",
+  "type": "CODE_SMELL",
+  "status": "ready",
+  "remediation": {
+    "func": "Constant\/Issue",
+    "constantCost": "10min"
+  },
+  "tags": [
+    "i18n",
+    "level-2"
+  ],
+  "defaultSeverity": "Minor",
+  "scope": "All"
+}

@@ -1,0 +1,32 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>Don't use the <code>Charset.defaultCharset()</code> method. It returns the default charset of the JVM, which may produced undesired results -- most often loss or corruption of text data (P0/P1 bugs). The Windows environment is particularly prone to issues with noncompliant forms of this method. Instead, use of the <code>Charset.forName(String charsetName)</code> method is recommended.
+<p>When using the compliant forms, be sure that arguments passed are valid charsets/encodings as a <code>String</code> name or <code>java.nio.Charset</code> instance. To insure compliance, the charset/encoding argument is checked with <code>Charset.isSupported</code>.</p>
+<p>As good practice, the Unicode UTF-8 encoding is ideal argument for use wherever possible. Unless working with big data or non-Unicode/legacy encodings, noncompliant forms may also generate SonarQube issues for unsupported encodings.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class CharsetInstanceCreationCheck {
+
+  Charset methodA1() {
+    return Charset.defaultCharset();  //Noncompliant
+  }
+
+  Charset methodB2() throws UnsupportedEncodingException {
+    return Charset.forName("US-ASCII");  //Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class CharsetInstanceCreationCheck {
+
+  Charset methodB1() throws UnsupportedEncodingException {
+    return Charset.forName("UTF-8");
+  }
+}
+</pre>
+

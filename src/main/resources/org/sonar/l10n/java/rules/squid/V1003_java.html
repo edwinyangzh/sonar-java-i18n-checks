@@ -1,0 +1,68 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>Don't use the <code>java.lang.String</code> constructors without an explicit charset/encoding. Violation of this rule can cause loss or corruption of text data (P0/P1 bugs). The method's vulnerabilities are due to the default charset/encoding being set at initialization of the JVM. Often, the default charset/encoding is not the desired. The Windows environment is particularly prone to issues with this API. The <code>String</code> class has four different constructor signatures that produce noncompliant results.</p>
+<p>When using the compliant forms, be sure that arguments passed are valid charsets/encodings as a <code>String</code> name or <code>java.nio.Charset</code> instance. To insure compliance, the charset/encoding argument is checked with <code>Charset.isSupported</code>.</p>
+<p>As a best practice, the Unicode UTF-8 encoding should be used wherever possible. There are, of course, exceptions such as work with big (textual) data or other text explicitly using non-Unicode/legacy encodings. Noncompliant forms may also generate SonarQube issues for unsupported encodings.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class StringConstructorCheck {
+
+  String methodA1(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes);  //Noncompliant 
+  }
+
+  String methodA2(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes, 1, 2);  //Noncompliant
+  }
+
+  String methodB1(byte[] bytes) {
+    return new String(bytes, 88);  //Noncompliant
+  }
+
+  String methodB2(byte[] bytes) {
+    return new String(bytes, 88, 2, 2);  //Noncompliant   }
+
+  String methodC1(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes,"US-ASCII");  //Noncompliant
+  }
+
+  String methodC2(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes, 1, 2, "US-ASCII");  //Noncompliant
+  }
+
+  String methodD1(byte[] bytes) {
+    return new String(bytes, StandardCharsets.ISO_8859_1);  //Noncompliant 
+  }
+
+  String methodD2(byte[] bytes) {
+    return new String(bytes, 1, 2, StandardCharsets.ISO_8859_1);  //Noncompliant 
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+class StringConstructorCheck {
+
+  String methodC3(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes,"UTF-8");
+  }
+
+  String methodC4(byte[] bytes) throws UnsupportedEncodingException {
+    return new String(bytes, 1, 2, "UTF-8");
+  }
+
+  String methodD3(byte[] bytes) {
+    return new String(bytes, StandardCharsets.UTF_8);
+  }
+
+  String methodD4(byte[] bytes) {
+    return new String(bytes, 1, 2, StandardCharsets.UTF_8);
+  }
+
+}
+</pre>
+

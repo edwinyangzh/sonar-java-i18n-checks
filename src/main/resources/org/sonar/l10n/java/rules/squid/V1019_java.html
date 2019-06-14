@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>Hard-coded (English or non-English) <code>Locale</code> field use should be avoided. Use of these constants could prevent software from running correctly. Always use an explicit, user-preferred locale as an argument for any <code>Locale</code> parameter.</p>
+
+<h2>Noncompliant Code Example</h2>
+<pre>
+  text.toLowerCase(Locale.CHINA);
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+  Locale userPreferredLocale = Locale.forLanguageTag("zh-Hans");
+  ...
+  text.toLowerCase(userPreferredLocale);
+</pre>

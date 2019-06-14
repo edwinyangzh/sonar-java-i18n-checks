@@ -1,0 +1,21 @@
+<!--
+  ~ Copyright (c) 2018-2019 VMware, Inc. All Rights Reserved.
+  ~ This software is released under MIT license.
+  ~ The full license information can be found in LICENSE in the root directory of this project.
+  -->
+
+<p>The <code>ServletResponse.getOutputStream()</code> method returns a <code>ServletOutputStream</code> suitable for writing binary data in the response. However, in most usesthe response data is text and not binary data. For text, developers should use <code>ServletResponse.getWriter()</code>.</p>
+<h2>Noncompliant Code Example</h2>
+<pre>
+class ServletResponseGetOutputStreamCheck {
+
+  ServletOutputStream methodA1(ServletResponse servletResponse) {
+    return servletResponse.getOutputStream();  //Noncompliant
+  }
+}
+</pre>
+<h2>Compliant Solution</h2>
+<pre>
+ServletResponse.getWriter()
+</pre>
+
