@@ -1,5 +1,8 @@
 # Java Internationalization (I18n) Rules for SonarQube
 
+## Notice
+
+New development of this plugin is moved to https://github.com/vmware-samples/SonarQube-Plugin-for-Java
 
 ## Installation
 
